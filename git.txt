@@ -1,0 +1,581 @@
+what is git ??? 
+ similar to the google docs saves a snap shot of the changes we have made to our file on various times . 
+ git hub is an extension to this feature of the google doc but to the code. The google docs Last Edited 8 days 
+ ago is a good example of how goole doc tracks all the changes that we have made over the time. 
+ google - docs => version history 
+ this version history helps use to see the various snap-shots of our document at various time stamps
+ and also restore back to a version in the past.
+ git is a version history but for our code and we can also revert back to a old version that we like.
+
+=========
+init git
+==========
+ this command will basically set up the git
+ in the current directory and ensure that all the 
+ files in the current directory are tracked.This is 
+ the first step to create create a first version
+ of the code in the folder. now git will track all 
+ the files in the current folder for changes .
+
+git status
+ this tells us all the changes that we have made so far 
+ from the previous version , since we dont have a version 
+ this will tell us that no commites have been made yet
+ and tells us we have to add the config.js and the index.js  
+ so that git can start tracking the changes made on them.
+
+git add [folder] or [file] or [.] current folder and all its sub folders
+ git add will allow us to pick the files that we want in
+ in the next version and then put them on a stage
+ After doing git add we see that 
+ the file has been added to some "staging" area , and 
+ git says that we need to use the command , git rm --cached <file> 
+ to remove the file from the staging area.
+
+NOTE THAT git add DOSE NOT CREATE A NEW VERSION, RATHER 
+IT LETS US TO PICK WHAT ALL WE WANT IN THE SNAP SHOT (  Version ).
+git first tells us to put our changes to the staging area show it to
+every one and then take a snap shot or our changes.
+
+commit === version in git terminology
+git commit -m "Version 1"
+ -m is a message that tells us what we have commited 
+ the output produced by the git is as follow : 
+ [master (root-commit) c3c9f94] Version 1
+ 3 files changed, 34 insertions(+)
+ create mode 100644 config.js
+ create mode 100644 git.txt
+ create mode 100644 src/index.js
+
+ this tells us that 3 files have been changed.
+ there are 34 insertions made
+ inaddition to the messages in git we also have to 
+ attach the mail and user name so that you can be 
+ blamed when things go wrong.
+
+  git config --global user.email "reddysukesh2707@gmail.com"
+  git config --global user.name "Sukesh Reddy R"
+
+============
+git log 
+=============
+ this command will tell us the list of all the snap shots 
+ that we have created so far. 
+ and the result is as follow 
+ PS C:\Users\sukes\Git> git log
+  commit c3c9f94afc28770e6b04fcaaa861f2292adabad0 (HEAD -> master)
+  Author: Sukesh Reddy R <reddysukesh2707@gmail.com>
+  Date:   Tue Jan 7 20:15:40 2025 +0530
+    Version 1
+
+
+Q. What happens if we want some of our changes to be in the earlier version
+that we have released. ???
+  if during the commit to Version 1 we forgot to add a 
+  change we can add the change using the following command
+  add the changes that you want to add . 
+  then do add the file to the staging area by using the command
+  git add . => this will add all the files to the staging area
+
+
+====================================
+git commit -m "Version 1" --amend
+======================================
+ this command will basically ammend the changes to the existing 
+ version and not create a new version. this is how we can edit a 
+ commit if we mess up .
+
+the git status command can be seen in the GUI 
+by using the Source Control in tab in the let Pallet
+this will tell us the list of all the modified 
+files and the changes that have been made in it.
+
+adding the git add command can be executed at the individual file level 
+by using the "+" icon corresponding to the file. for git add of the entire
+directory we can use the git "+" icon next to the directory 
+
+
+============== staging area ==============
+this area is called the "STAGING AREA" this area includes all the changes 
+that we have picked to be included in the snap shot and want to be there 
+in the next release under this staging area is the 
+play area formally called "WORKING AREA" .where the code that we are working 
+on but do not want to commit them exists. 
+
+Q. If we have staged a code change then what
+ happens to the modifications that are done to it later. 
+the git trackes the changes in code and not the changes in file. 
+so git will keep the original copy in the staging area and keeps the newly added
+code changes in the staging area. now the files will appear in both the play area 
+and the working area as well , but the stage area will not contain the working
+area code unless staged , and note that commit will always commit the code 
+in the staging area. 
+
+========================================
+=  git reset [file] or [folder] or [.] =  
+=========================================
+Q. How to remove the file out of the staging area. 
+  for this purpose we have the "-" icon in the vs code , 
+  this will remove the changes out of the 
+  staging area. the command for this is the git reset 
+
+please not that removing a file from the staging area 
+does not mean that we 
+get a clean copy of the code from the previous version. 
+all the git reset will do is that it will reset the staging area. 
+the above command moves the files from the staging area 
+to a working area =>  git reset [folder] or [file] or [.]
+
+==========================================
+git checkout -- [file] or [folder] or [.] 
+=========================================== 
+Q. How to reset the changes made in the working area  
+  how can we get a clean code back , by removing our local changes , for this purpose we have 
+  the git checkout command this will remove all changes made in the working area i.e our file
+  and make a clean copy of the file from the previous version. we can
+  also specify the specific versions using the git checkout command 
+  also not that that git checkout will only work in the play area
+  or the working area. all the changes that are already staged will 
+  not be removed from the staging area as well as from the file.
+
+the reverse u button in the GUI is samae as the git checkout command 
+
+key take away so far 
+
+*********** KEY TAKE AWAYS SO FAR ***********
+git init => git add (add files to the staging area) => git commit (creating the snap shot )
+git commit => we want to add a forgotten change
+ in the older version => git commit -m "" --amend 
+work area => staging area =>  git add . 
+staging area => actual snap shot => git commit 
+staging area => work area => git reset 
+work area => to original code => git checkout -- [file name] [folder] [.] 
+git checkout will not override the changes that havae 
+been added in the staging area. 
+to see all the snap shots that git has creaed => git log 
+
+
+Q. Then why cant the git track the code
+ automatically like in the case of the google doc
+  this is because we dont want it to happen because our 
+  code is not working completely unless all the codeing is done , 
+  lets say if the git creates a Version 1 when we have missed
+  typing a semicolen then this snap shot is of no use
+  because we have missed out on the documents 
+
+so far we have seen git checkout with file name 
+this will update the current unstaged changes to the 
+copy of latest version.
+git checkout "COMMIT HASH" 
+  NOW TO VIEW A PREVIOUS VERSION OF OUR CODE USING GIT 
+  we have to go back to the previous version. we need a 
+  way to uniquely identify it   for this purpose we can use
+  the "COMMIT HASH" that can be seen in the git log 
+
+  the command is git checkout "#" 
+
+  in the above code the git log --all can be treated as a way to see all the versions 
+  i.e snap shots or commits made so far. 
+  the HEAD is kind of a pointer that tells us to which version we are currently refering to
+  the master tells us the original copy that we were working on. HEAD is kind 
+  of the pointer will be used as a highlighter in the google docs
+  to see what is the current version we are looking at . 
+
+  git commit "" //hashcode corresponding to version2 will make the git HEAD point to the 
+  hashcode corresponding to the version 2's hashcode 
+
+
+Restore this version button in google docs 
+  we might be tempted to do is , to do a git checkout "#code" -- version 1 
+  then we might make the changes to the current version and then 
+  do git commit -m "Version 1.0" , but this cause an issue because 
+  this creates anouther branch which is not  what we were expecting .
+  Git will create a new branch if we do git checkout #code followed by 
+  git commit -m "Version 1" 
+
+git add . => git commit -m "update" => but this will not work and this will 
+create a new branch thought this is not what we want this is not 
+what is expected right???? but with respect to the git , I think this is 
+absolutely correct 
+
+
+the word master denotes the master copy or the latest coopy of the current branch
+which is the master branch. 
+note that the word master denotes the branch name , it makes us easy to switch to anouther 
+version or commit , by not typing the hashcode we can simply use the git checkout master
+it always points to the latest commit in the branch 
+
+
+to create a version of the code without creating a branch . we need to use
+
+the git checkout #code [and the files that we need to get from the specifeid version]
+
+unlike checking out an entire snap shot in which case the head gets updated with the 
+above command the git will only checkout the partial project and there fore 
+the head and the master tag is unaltered . 
+
+master alwyas points to the latest commit in the branch . 
+git checkout master
+
+
+we are taking the copies of the previous verion and pasting it to the current version 
+and the above command doese the same. on doing the partial checkout the git 
+automaatically adds the new files to the staging area
+
+
+one key take away , not that after we created a new branch using the 
+git checkout #code and then took a git checkout master , our code changes 
+corresponding to to the branching effect are log permananently this is
+callled "Dangling Commit" , 
+PS C:\Users\sukes\Git> git checkout master
+Warning: you are leaving 1 commit behind, not connected to
+any of your branches:
+
+  ca3241d Version 1 Update
+
+If you want to keep it by creating a new branch, this may be a good time
+to do so with:
+
+ git branch <new-branch-name> ca3241d
+
+Switched to branch 'master'
+
+
+since the "Version 1 Updated" is no longer part of a branch 
+we will not be able to access it any way from the branch 
+the only way to access this is thourought the code ca321d , 
+but this will eventually be collecteed by git garbage collector. 
+THIS IS A VERY IMPORTANT CONCEPT TO REMEMEBER. 
+
+
+
+
+EXTRA FEATURES : 
+
+Alias or short cuts
+===================== 
+
+git status => can be done to git s => to do this we need to do git config --global  alias.s "status"
+git will subtitute s for status and get the work done 
+
+git commit -m "" => can be simpliefed to => git co "hellow" => for thsi to work the alias has to be 
+git config --global alias.co "commit -m"
+
+gitIgnore 
+==========
+
+add the files in the gitIgnore . or the path to these files 
+
+remove git 
+===========
+to completely remove git from the project remove the .git file and you are done. 
+by removing all the changes tracked so far. 
+
+
+
+
+PROFESSIONAL GIT HUB 
+=======================
+the above steps show about the git commmands , now lets lear about git hub.
+
+now we need a way to create an online back up of the code we had so far.
+we have other solutions for online back up like google cloud , iCloud etc 
+
+here we are going to recrate the features of google drive 
+1. Create an online back up ( using upload) called backup 
+2. download google drive to a special folder so what ever
+   upload to the google drive gets downloaoded to this special folder => called sync 
+3. addition to the special folder gets reflected in the google cloud 
+   back up as well. 
+
+   the point 2 and 3 are called 2 - way sync . 
+online back up of code can also be done using google drive ? then why github
+this is because git hub is more optimized to track repositorries 
+while google drive is good at tracking files and thats why we 
+need github . there are other services that do the same thing like github 
+i.e bigbucket , GitLab , GitHub
+
+** we want to achieve the drag way of uploading the code to github 
+Step 1 : we are going to create a new repository on git hub
+at this stage we have 2 repositories one is the one in our "local" 
+and the other one is in the github , which is the "remote" repository 
+
+how to upload the local repository to the remote repository. 
+to link the remote repository to the local repository 
+git remote add [nick name to the remote repository ( origin )] [url of the remote repository]
+
+git remote add origin https://github.com/2707sukesh/git-tutorial.git
+this will ensure that the local repository has a link to the remote repositty 
+
+========================
+git remote 
+========================
+
+will list the nicknames of the remote repositories that are currently
+linked to this local repositories 
+
+========================
+git remote -v => will give all the name and the url of the remote repository 
+========================
+to remove a link to the remote repository 
+we can give 
+========================
+git remote remove origin 
+========================
+
+uploading the code to github is called pushing 
+and downloading the code from github is called pulling
+
+Pushing our code to github
+to push code to git hub , we should configure our details 
+properly in the local reposotiry so that the remote repository 
+can track because of whome this changes were added 
+for this we have 
+
+
+git config --global credential.username "2707sukesh"
+
+to push our code to github 
+to push 
+
+git push [remote repository ] [branch name ???? ]
+
+
+git log --all --graph => will list a dashed line each line is called a branch 
+
+git history can actually branch => this happens if we restore to a previous 
+branch with the #code and then start making changes and commiting , this will 
+create a new branch . ( dangling branch effect ) 
+
+* commit 0f625d669a2a79fafe454a21069586c94b357d9b (HEAD -> master)
+| Author: Sukesh Reddy R <reddysukesh2707@gmail.com>
+| Date:   Thu Jan 9 08:19:31 2025 +0530
+|
+|     Version 1 Updated in same branch
+|
+* commit 0914e3c9e68da626a8b8f8f91dc9a9c122e92e22
+| Author: Sukesh Reddy R <reddysukesh2707@gmail.com>
+| Date:   Thu Jan 9 01:14:29 2025 +0530
+|
+|     Version 3
+|
+* commit fa5b0dfcbd21056becb692d0cdee1b6d67f5263b
+| Author: Sukesh Reddy R <reddysukesh2707@gmail.com>
+| Date:   Thu Jan 9 01:14:00 2025 +0530
+|
+|     Version 2
+|
+* commit 703f3ff579ff19cc256d882c98dd216ace1227e8
+  Author: Sukesh Reddy R <reddysukesh2707@gmail.com>
+  Date:   Thu Jan 9 00:49:46 2025 +0530
+
+      Version 1.0 Reloaded
+
+
+the git log command shows us only one branch and that one branch
+is master . 
+
+when we commit chages to git we dont just push one changes 
+we also push our commit history , this is stored in the form 
+of a branch so we need to give
+=============================
+ git push origin [branch name] 
+ ==============================
+the branch name tells us what all history has to be stored 
+in the branch 
+
+
+Understanding the github UI 
+=============================
+
+the initial page that we see is the shows the last commit 
+message of each individual file . 
+
+if we click on a specific file we can see two sections 
+one is the git Code => that shows the currnt copy 
+and the other is the git Blame => that shows whome to blame 
+
+in the table where we can see the latest commit message we also 
+have an option to create the see all the histories 
+in the histories can clink browse files and restore to a previous 
+version and see the changes that were part of the previous version.
+
+same as git checkout #code 
+
+git hub gives a lot of visibility rather than a generic backup 
+services . 
+
+
+NOW THE 2 WAY SYNC FEATURE 
+==========================
+how to see where our local changes are and where the remote repository is
+lets add a new checkin to our master branch 
+
+* commit 0f625d669a2a79fafe454a21069586c94b357d9b (HEAD -> master, origin/master)
+
+the origin/master is called the remote tracking branch .
+
+this tells us how the origin branch looks like on github
+
+if we make any change and commit to our local then hers what happens 
+
+
+* commit a675deae997c446363e019b934cb16411e5c60a1 (HEAD -> master)
+| Author: Sukesh Reddy R <reddysukesh2707@gmail.com>
+| Date:   Mon Jan 20 23:01:16 2025 +0530
+|
+|     Version 11
+|
+* commit 0f625d669a2a79fafe454a21069586c94b357d9b (origin/master)
+
+the master of the local repository moves forward , but notice
+that the master of the origin branch stays backward to the place where 
+it was earlier . 
+
+to ensure that this also moves forward we have to also push the 
+version 11 changes to the remote repository 
+
+to do this we need to use push our changs 
+
+git push origin master 
+
+if we simply do git push origin master => then we get a message telling 
+that every thing is up to date
+
+if we dont make any commits and then try git push 
+we still get up to daate because git push only pushes 
+local commits 
+
+ONLY PUSHES COMMITS TO GITHUB and not the changes in the staging are or the play area.
+
+
+how to edit a previous commit 
+for the git it is git commit --ammend -m "Version 12"
+
+* commit 1eb18a2978b96202036a26b48e1aef8bb46152c9 (HEAD -> master)
+| Author: Sukesh Reddy R <reddysukesh2707@gmail.com>
+| Date:   Mon Jan 20 23:01:16 2025 +0530
+|
+|     Version 12
+|
+| * commit a675deae997c446363e019b934cb16411e5c60a1 (origin/master)
+|/  Author: Sukesh Reddy R <reddysukesh2707@gmail.com>
+|   Date:   Mon Jan 20 23:01:16 2025 +0530
+|
+|       Version 11
+|
+* commit 0f625d669a2a79fafe454a21069586c94b357d9b
+| Author: Sukesh Reddy R <reddysukesh2707@gmail.com>
+| Date:   Thu Jan 9 08:19:31 2025 +0530
+|
+|     Version 1 Updated in same branch
+|
+* commit 0914e3c9e68da626a8b8f8f91dc9a9c122e92e22
+
+
+
+this kind of created a new branch leaving behind the 
+origin /master 
+
+PS C:\Program Files\GitPractice>  git push origin master
+To https://github.com/2707sukesh/git-tutorial.git
+ ! [rejected]        master -> master (non-fast-forward)
+error: failed to push some refs to 'https://github.com/2707sukesh/git-tutorial.git'
+hint: Updates were rejected because the tip of your current branch is behind
+hint: its remote counterpart. If you want to integrate the remote changes,
+hint: use 'git pull' before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+this is because we are overriding the changes in the master 
+in the github and we are loosing the commit made to Version 11 
+loosing who has made that commit . 
+so git hub doese not encourage this but we can do this by using 
+the -f operator . ( -f force push ) 
+
+
+SYNC changes from github to our computer
+
+to get the copy of the online backup that we have on github we 
+need to use the command ( this will copy or clone the remote 
+repository to our local ) if the folder name is not specified 
+git will download it the repo named folder 
+=============================
+git clone [url] [folder_name]
+==============================
+
+if you try to git clone again thinking that a new clone will 
+take the copy from the remote repository you ara wrong !!
+you get this error . 
+  git clone https://github.com/2707sukesh/git-tutorial.git  
+  fatal: destination path 'git-tutorial' already exists and is not an empty directory.
+
+how do we get the changes some one has made in the 
+remote repository to our computer ??
+one way to know if weather there are some changes in the remote repositorie
+is by running 
+=====
+git fetch
+====
+this will take a code and then update it without telling us what is the exact 
+code , to get the actual code to our repostory 
+
+
+we need to use 
+git pull [name of the remote repostiroy ] [branch name ]
+git pull origin master
+ 
+if we do git pull without any changes made in the rermote repository 
+we will get remote you are all set and ready to go. 
+
+
+if you have locally made some change on the file that were
+commited to the remote repositryo we will get conflicts. 
+
+we need to resolve the conflicts , commit our changs 
+then  commit our changes to the remote repository . 
+
+
+
+Scenario 1 
+
+We have an existing project and we want to do the following operations
+
+1. Integrate git to our project => git init
+2. Upload it to git hub => git add sukesh_remote_repo [url]
+
+
+Scenario 3 
+
+if we have a new project and want to make it git compatable 
+
+we can first create a repository on github then clone the empty repo
+and then start making changes to our empty repo and keep pushing 
+our change and fetching the updates 
+
+
+
+BRANCHING MERGING AND FEATURE BRANCH WORK FLOW
+Consider a Scenario , where you are working on a new feature 
+
+you made some initial commits to the branch , 
+
+
+ now if we have an issue and want to add some code 
+ we dont want to put it on top of version 3.1 because 
+ 3.1 has an incomplete feature 
+ for this purpose we create a branch for our feature 
+ then we push our changes to the branch then we continue 
+ to fix the bug on the main branch , then ones our featuer is done 
+ we merge our changes to the main branch. 
+
+ gits default name of the main branch is the master kind of like the master copy 
+Version3.1 ( some more commit with respect to you feature )
+  ||
+Version3.0 ( you made commit with respect to some in inprogress work)
+  ||
+version 2 
+  ||
+version 1 
+
+
+
