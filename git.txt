@@ -389,7 +389,11 @@ Understanding the github UI
 =============================
 
 the initial page that we see is the shows the last commit 
-message of each individual file . 
+message of each individual file .
+
+one important point , git only trackes the changes and not the whole copy of the file
+so when ever you commit to one perticular file , only that files time is changed 
+in the UI and the rest of the files remain unchanged. 
 
 if we click on a specific file we can see two sections 
 one is the git Code => that shows the currnt copy 
